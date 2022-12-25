@@ -13,6 +13,7 @@ let opt:object = {
 "Access-Control-Allow-Origin": "*"
     }
 }
+
 async function getOpts(url:string, opt:object) : Promise<Pokemon[]> {
     let options: Array<Pokemon> = []
     
@@ -28,7 +29,6 @@ async function getOpts(url:string, opt:object) : Promise<Pokemon[]> {
         };
         options.push(pokemon)
     });
-
     return options
 }
 
