@@ -13,20 +13,26 @@ let opt:object = {
 "Access-Control-Allow-Origin": "*"
     }
 }
-let options: Array<Pokemon> = []
+async function getOpts(url:string, opt:object) : Promise<Pokemon[]> {
+    let options: Array<Pokemon> = []
+    
+    let f: Response = await fetch(url, opt)
+    let p = await f.text()
+    let data:object = await JSON.parse(p)
+    
+    await data["results"].forEach(element => {
+        let pokemon: Pokemon = {
+            id: element.url.split("/")[6],
+            name: element.name,
+            url: element.url
+        };
+        options.push(pokemon)
+    });
 
-let f: Response = await fetch(url, opt)
-let p = await f.text()
-let data:object = await JSON.parse(p)
+    return options
+}
 
-await data["results"].forEach(element => {
-    let pokemon: Pokemon = {
-        id: element.url.split("/")[6],
-        name: element.name,
-        url: element.url
-    };
-    options.push(pokemon)
-});
+let options = getOpts(url, opt)
 
 export {
     options
