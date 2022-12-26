@@ -1,6 +1,6 @@
 <script lang="ts">
     import Options from "./lib/Options.svelte";
-    let pokemon;
+    let pokemon: undefined | object | string;
     function cap(str: string): string {
         let cap = str.charAt(0).toUpperCase() + str.slice(1);
         return cap;
@@ -15,7 +15,7 @@
         <p class="card">
             🤔 I think that pokemon doesn't exist... Try again! 🤓
         </p>
-    {:else if pokemon}
+    {:else if typeof pokemon === "object"}
         <h2>
             {pokemon.id} _ {cap(pokemon.name)}
         </h2>

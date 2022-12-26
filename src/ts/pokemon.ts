@@ -54,6 +54,7 @@ async function fetching(id:string) : Promise<string | Pokemon> {
     if (!id) {
         return "fail"
     }
+    id = id.trimEnd().trimStart().toLowerCase()
     let url:string = `https://pokeapi.co/api/v2/pokemon/${id}`
     let opt:object = {
         method: "GET",
@@ -62,7 +63,6 @@ async function fetching(id:string) : Promise<string | Pokemon> {
         }
     }    
     let f: Response = await fetch(url, opt)
-    
     if (f.ok) {
         let p = await f.text()
         let data:object = await JSON.parse(p)
@@ -70,7 +70,6 @@ async function fetching(id:string) : Promise<string | Pokemon> {
         return pokemon
     } else {
         return "fail";
-        
     }
 }
 

@@ -2,8 +2,7 @@
 
 interface Pokemon {
     id:string,
-    name:string,
-    url: string
+    name:string
 }
 
 let url:string = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
@@ -24,8 +23,7 @@ async function getOpts(url:string, opt:object) : Promise<Pokemon[]> {
     await data["results"].forEach(element => {
         let pokemon: Pokemon = {
             id: element.url.split("/")[6],
-            name: element.name,
-            url: element.url
+            name: element.name
         };
         options.push(pokemon)
     });
